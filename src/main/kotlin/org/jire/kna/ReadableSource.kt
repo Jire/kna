@@ -8,6 +8,6 @@ interface ReadableSource : Source {
 	fun read(address: Pointer, data: Pointer, bytesToRead: Long): Boolean
 	
 	fun read(address: Long, data: Memory, bytesToRead: Long = data.size()) =
-		read(PointerCache[address], data, bytesToRead)
+		read(PointerCache[offset(address)], data, bytesToRead)
 	
 }
