@@ -8,4 +8,8 @@ abstract class AbstractAttachedModule(
 	override val process: AttachedProcess
 ) : AttachedModule,
 	ReadableSource by process,
-	WritableSource by process
+	WritableSource by process {
+	
+	override fun offset(offset: Long) = address + offset
+	
+}

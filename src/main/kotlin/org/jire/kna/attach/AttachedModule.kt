@@ -1,10 +1,9 @@
 package org.jire.kna.attach
 
-import org.jire.kna.Addressed
 import org.jire.kna.ReadableSource
 import org.jire.kna.WritableSource
 
-interface AttachedModule : Addressed, ReadableSource, WritableSource {
+interface AttachedModule : ReadableSource, WritableSource {
 	
 	val process: AttachedProcess
 	

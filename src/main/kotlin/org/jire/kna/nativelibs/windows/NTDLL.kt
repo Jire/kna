@@ -13,4 +13,12 @@ object NTDLL : NativeLib("ntdll") {
 		numberOfBytesToRead: Long
 	): Long
 	
+	@JvmStatic
+	external fun NtWriteVirtualMemory(
+		processHandle: Pointer,
+		baseAddress: Pointer,
+		buffer: Pointer,
+		numberOfBytesToWrite: Long
+	): Long
+	
 }

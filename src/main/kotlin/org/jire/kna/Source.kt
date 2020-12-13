@@ -1,3 +1,3 @@
 package org.jire.kna
 
-interface Source
+interface Source : Addressed
