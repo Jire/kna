@@ -21,18 +21,11 @@ class WindowsAttachedModule(
 	
 	override val size = info.SizeOfImage.toLong()
 	
-	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-		if (javaClass != other?.javaClass) return false
-		
-		other as WindowsAttachedModule
-		
-		if (handle != other.handle) return false
-		if (info != other.info) return false
-		if (size != other.size) return false
-		
-		return true
-	}
+	override fun equals(other: Any?) = this === other
+			|| (other is WindowsAttachedModule
+			&& handle == other.handle
+			&& info == other.info
+			&& size == other.size)
 	
 	override fun hashCode(): Int {
 		var result = handle.hashCode()
@@ -44,6 +37,5 @@ class WindowsAttachedModule(
 	override fun toString(): String {
 		return "WindowsAttachedModule(handle=$handle, info=$info, name='$name', size=$size)"
 	}
-	
 	
 }
