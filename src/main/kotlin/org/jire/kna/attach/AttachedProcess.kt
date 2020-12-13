@@ -5,6 +5,6 @@ import org.jire.kna.WritableSource
 
 interface AttachedProcess : ReadableSource, WritableSource {
 	
-	fun attachModule(moduleName: String): AttachedModule
+	fun modules(attach: Boolean = true): AttachedModules
 	
 }

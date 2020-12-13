@@ -32,5 +32,4 @@ object WindowsAttacher : Attacher {
 		return WindowsAttachedProcess(handle)
 	}
 	
-	
 }
