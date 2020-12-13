@@ -1,4 +1,4 @@
-# KNA
+# KNA (Kotlin Native Access)
 
 _High-performance easy native access from Kotlin_
 
