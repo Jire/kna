@@ -2,8 +2,14 @@ package org.jire.kna.attach
 
 interface Attacher {
 	
-	fun attachProcessByName(processName: String): AttachedProcess
+	fun byName(
+		processName: String,
+		attachAccess: AttachAccess
+	): AttachedProcess?
 	
-	fun attachProcessByID(processID: Int): AttachedProcess
+	fun byID(
+		processID: Int,
+		attachAccess: AttachAccess
+	): AttachedProcess?
 	
 }
