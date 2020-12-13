@@ -1,9 +1,9 @@
 package org.jire.kna.nativelibs.windows
 
 import com.sun.jna.Pointer
-import org.jire.kna.nativelibs.NativeLib
+import org.jire.kna.nativelibs.DirectNativeLib
 
-object NTDLL : NativeLib("ntdll") {
+object NTDLL : DirectNativeLib("ntdll") {
 	
 	@JvmStatic
 	external fun NtReadVirtualMemory(
