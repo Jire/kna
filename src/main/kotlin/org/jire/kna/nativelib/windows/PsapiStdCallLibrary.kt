@@ -1,4 +1,4 @@
-package org.jire.kna.nativelibs.windows
+package org.jire.kna.nativelib.windows
 
 import com.sun.jna.platform.win32.WinDef
 import com.sun.jna.platform.win32.WinNT

@@ -4,7 +4,7 @@ import com.sun.jna.Native
 import com.sun.jna.platform.win32.Psapi.MODULEINFO
 import com.sun.jna.platform.win32.WinDef
 import org.jire.kna.attach.AbstractAttachedModule
-import org.jire.kna.nativelibs.windows.Psapi
+import org.jire.kna.nativelib.windows.Psapi
 
 class WindowsAttachedModule(
 	address: Long,

@@ -7,7 +7,7 @@ import com.sun.jna.platform.win32.WinDef
 import com.sun.jna.ptr.IntByReference
 import org.jire.kna.attach.AbstractAttachedModules
 import org.jire.kna.attach.AttachedProcess
-import org.jire.kna.nativelibs.windows.Psapi
+import org.jire.kna.nativelib.windows.Psapi
 import com.sun.jna.platform.win32.Psapi.INSTANCE as JNAPsapi
 
 object WindowsAttachedModules : AbstractAttachedModules() {

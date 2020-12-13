@@ -1,6 +1,6 @@
-package org.jire.kna.nativelibs.windows
+package org.jire.kna.nativelib.windows
 
-import org.jire.kna.nativelibs.DirectNativeLib
+import org.jire.kna.nativelib.DirectNativeLib
 
 object User32 : DirectNativeLib("user32") {
 	

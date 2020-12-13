@@ -1,7 +1,7 @@
-package org.jire.kna.nativelibs.windows
+package org.jire.kna.nativelib.windows
 
 import com.sun.jna.Native
-import org.jire.kna.nativelibs.NativeLib
+import org.jire.kna.nativelib.NativeLib
 
 private const val PSAPI_LIBRARY_NAME = "Psapi"
 

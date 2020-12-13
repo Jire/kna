@@ -1,7 +1,7 @@
-package org.jire.kna.nativelibs.windows
+package org.jire.kna.nativelib.windows
 
 import com.sun.jna.Pointer
-import org.jire.kna.nativelibs.DirectNativeLib
+import org.jire.kna.nativelib.DirectNativeLib
 
 object NTDLL : DirectNativeLib("ntdll") {
 	

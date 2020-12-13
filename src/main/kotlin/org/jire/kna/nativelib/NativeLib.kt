@@ -1,4 +1,4 @@
-package org.jire.kna.nativelibs
+package org.jire.kna.nativelib
 
 interface NativeLib {
 	

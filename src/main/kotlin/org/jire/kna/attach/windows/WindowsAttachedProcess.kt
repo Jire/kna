@@ -3,7 +3,7 @@ package org.jire.kna.attach.windows
 import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.WinNT
 import org.jire.kna.attach.AbstractAttachedProcess
-import org.jire.kna.nativelibs.windows.NTDLL
+import org.jire.kna.nativelib.windows.NTDLL
 
 class WindowsAttachedProcess(val handle: WinNT.HANDLE) : AbstractAttachedProcess() {
 	
