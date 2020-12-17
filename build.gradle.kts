@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm") version "1.4.21"
+	id("com.github.dcendents.android-maven") version "2.1" apply true
 }
 
 group = "org.jire"
@@ -22,5 +23,3 @@ dependencies {
 tasks.withType<KotlinCompile> {
 	kotlinOptions.jvmTarget = "13"
 }
-
-tasks.withType<Test> {}
