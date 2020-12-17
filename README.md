@@ -2,6 +2,7 @@
 
 _High-performance easy native access from Kotlin_
 
+[![JitPack](https://jitpack.io/v/org.jire/kna.svg)](https://jitpack.io/#org.jire/kna)
 [![Build Status](https://travis-ci.com/Jire/kna.svg?branch=master)](https://travis-ci.com/Jire/kna)
 [![License](https://img.shields.io/github/license/Jire/kna.svg)](https://github.com/Jire/kna/blob/master/LICENSE.txt)
 
@@ -30,13 +31,13 @@ Then add the KNA dependency:
 Gradle Kotlin:
 
 ```kotlin
-implementation("com.github.Jire", "kna", "0.1.0")
+implementation("org.jire", "kna", "0.1.1")
 ```
 
 Gradle Groovy:
 
 ```groovy
-implementation 'com.github.Jire:kna:0.1.0'
+implementation 'org.jire:kna:0.1.1'
 ```
 
 ---
