@@ -9,6 +9,8 @@ import com.sun.jna.platform.win32.Kernel32.INSTANCE as JNAKernel32
 
 object WindowsAttacher : Attacher {
 	
+	override fun defaultAttachAccess() = WindowsAttachAccess.All
+	
 	override fun byName(processName: String, attachAccess: AttachAccess): AttachedProcess? {
 		attachAccess as WindowsAttachAccess
 		
