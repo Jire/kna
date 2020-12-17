@@ -5,7 +5,39 @@ _High-performance easy native access from Kotlin_
 [![Build Status](https://travis-ci.org/Jire/kna.svg?branch=master)](https://travis-ci.org/Jire/kna)
 [![License](https://img.shields.io/github/license/Jire/kna.svg)](https://github.com/Jire/kna/blob/master/LICENSE.txt)
 
-Currently still under development, and not ready for release.
+Currently still under development -- documentation and unit tests are missing.
+
+---
+
+## Using from Gradle
+
+First add the JitPack repository:
+
+Gradle Kotlin:
+
+```kotlin
+maven("https://jitpack.io")
+```
+
+Gradle Groovy:
+
+```groovy
+maven { url 'https://jitpack.io' }
+```
+
+Then add the KNA dependency:
+
+Gradle Kotlin:
+
+```kotlin
+implementation("com.github.Jire", "kna", "0.1.0")
+```
+
+Gradle Groovy:
+
+```groovy
+implementation 'com.github.Jire:kna:0.1.0'
+```
 
 ---
 
