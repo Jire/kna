@@ -19,6 +19,6 @@ dependencies {
 	implementation("it.unimi.dsi", "fastutil", "8.4.4")
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
 	kotlinOptions.jvmTarget = "13"
 }
