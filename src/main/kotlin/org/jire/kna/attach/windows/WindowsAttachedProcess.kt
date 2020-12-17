@@ -7,8 +7,7 @@ import org.jire.kna.nativelib.windows.NTDLL
 
 class WindowsAttachedProcess(val handle: WinNT.HANDLE) : AbstractAttachedProcess() {
 	
-	override fun modules(attach: Boolean) =
-		WindowsAttachedModules.apply { if (attach) attach(this@WindowsAttachedProcess) }
+	override val modules = WindowsAttachedModules()
 	
 	override fun read(address: Pointer, data: Pointer, bytesToRead: Long) =
 		NTDLL.NtReadVirtualMemory(handle.pointer, address, data, bytesToRead) > 0

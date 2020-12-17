@@ -10,11 +10,15 @@ import org.jire.kna.attach.AttachedProcess
 import org.jire.kna.nativelib.windows.Psapi
 import com.sun.jna.platform.win32.Psapi.INSTANCE as JNAPsapi
 
-object WindowsAttachedModules : AbstractAttachedModules() {
+class WindowsAttachedModules : AbstractAttachedModules() {
 	
-	private const val MODULE_ENUMERATION_SIZE = 4096
+	companion object {
+		private const val MODULE_ENUMERATION_SIZE = 4096
+	}
 	
 	override fun attach(process: AttachedProcess) {
+		if (!moduleNameToModule.isEmpty()) moduleNameToModule.clear()
+		
 		process as WindowsAttachedProcess
 		
 		val modules = arrayOfNulls<WinDef.HMODULE>(MODULE_ENUMERATION_SIZE)
