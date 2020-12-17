@@ -1,5 +1,6 @@
 package org.jire.kna.attach
 
+import org.jire.kna.PointerCache
 import org.jire.kna.ReadableSource
 import org.jire.kna.WritableSource
 
@@ -11,5 +12,7 @@ abstract class AbstractAttachedModule(
 	WritableSource by process {
 	
 	override fun offset(offset: Long) = address + offset
+	
+	override fun addressToPointer(address: Long) = PointerCache[offset(address)]
 	
 }
