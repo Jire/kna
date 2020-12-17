@@ -1,18 +1,14 @@
 package org.jire.kna.attach
 
-import org.jire.kna.PointerCache
-import org.jire.kna.ReadableSource
-import org.jire.kna.WritableSource
+import com.sun.jna.Pointer
 
 abstract class AbstractAttachedModule(
 	override val address: Long,
 	override val process: AttachedProcess
-) : AttachedModule,
-	ReadableSource by process,
-	WritableSource by process {
+) : AttachedModule {
 	
-	override fun offset(offset: Long) = address + offset
+	override fun read(address: Pointer, data: Pointer, bytesToRead: Long) = process.read(address, data, bytesToRead)
 	
-	override fun addressToPointer(address: Long) = PointerCache[offset(address)]
+	override fun write(address: Pointer, data: Pointer, bytesToWrite: Long) = process.write(address, data, bytesToWrite)
 	
 }
