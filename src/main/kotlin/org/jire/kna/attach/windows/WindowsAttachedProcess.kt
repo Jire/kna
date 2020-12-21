@@ -10,7 +10,10 @@ import org.jire.kna.nativelib.windows.NTDLL
 class WindowsAttachedProcess(val handle: WinNT.HANDLE) : AbstractAttachedProcess() {
 	
 	@Volatile
-	var kernel32Mode = false
+	var kernel32Reads = false
+	
+	@Volatile
+	var kernel32Writes = false
 	
 	override val modules = WindowsAttachedModules()
 	
@@ -19,7 +22,7 @@ class WindowsAttachedProcess(val handle: WinNT.HANDLE) : AbstractAttachedProcess
 	private val writtenMemory = Memory(8)
 	
 	override fun read(address: Pointer, data: Pointer, bytesToRead: Long): Boolean {
-		if (kernel32Mode) {
+		if (kernel32Reads) {
 			return Kernel32.ReadProcessMemory(handle.pointer, address, data, bytesToRead.toInt(), 0) > 0
 		}
 		NTDLL.NtReadVirtualMemory(handle.pointer, address, data, bytesToRead, readMemory)
@@ -28,7 +31,7 @@ class WindowsAttachedProcess(val handle: WinNT.HANDLE) : AbstractAttachedProcess
 	}
 	
 	override fun write(address: Pointer, data: Pointer, bytesToWrite: Long): Boolean {
-		if (kernel32Mode) {
+		if (kernel32Writes) {
 			return Kernel32.WriteProcessMemory(handle.pointer, address, data, bytesToWrite.toInt(), 0) > 0
 		}
 		NTDLL.NtWriteVirtualMemory(handle.pointer, address, data, bytesToWrite, writtenMemory)
