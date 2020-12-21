@@ -31,13 +31,13 @@ Then add the KNA dependency:
 Gradle Kotlin:
 
 ```kotlin
-implementation("org.jire", "kna", "0.2.1")
+implementation("org.jire", "kna", "0.2.2")
 ```
 
 Gradle Groovy:
 
 ```groovy
-implementation 'org.jire:kna:0.2.1'
+implementation 'org.jire:kna:0.2.2'
 ```
 
 ---
