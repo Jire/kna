@@ -1,6 +1,7 @@
 plugins {
 	kotlin("jvm") version "1.4.21"
 	java
+	`java-library`
 	`maven-publish`
 	id("com.github.dcendents.android-maven") version "2.1" apply true
 	id("com.jfrog.bintray") version "1.8.5" apply true
@@ -37,9 +38,9 @@ dependencies {
 	implementation("it.unimi.dsi", "fastutil", "8.4.4")
 }
 
-val sourcesJar by tasks.creating(Jar::class) {
-	archiveClassifier.set("sources")
-	from(sourceSets.getByName("main").allSource)
+java {
+	withJavadocJar()
+	withSourcesJar()
 }
 
 publishing {
@@ -49,9 +50,14 @@ publishing {
 			artifactId = PROJECT_NAME
 			version = PROJECT_VERSION
 			from(components["java"])
-			
-			artifact(sourcesJar)
-			
+			versionMapping {
+				usage("java-api") {
+					fromResolutionOf("runtimeClasspath")
+				}
+				usage("java-runtime") {
+					fromResolutionResult()
+				}
+			}
 			pom.withXml {
 				asNode().apply {
 					appendNode("description", PROJECT_DESCRIPTION)
@@ -74,6 +80,12 @@ publishing {
 				}
 			}
 		}
+	}
+}
+
+tasks.javadoc {
+	if (JavaVersion.current().isJava9Compatible) {
+		(options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
 	}
 }
 
