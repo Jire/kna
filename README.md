@@ -14,13 +14,13 @@ Currently still under development -- documentation and unit tests are missing.
 Gradle Kotlin:
 
 ```kotlin
-implementation("org.jire", "kna", "0.2.2")
+implementation("org.jire", "kna", "0.2.3")
 ```
 
 Gradle Groovy:
 
 ```groovy
-implementation group: 'org.jire', name: 'kna', version: '0.2.2'
+implementation group: 'org.jire', name: 'kna', version: '0.2.3'
 ```
 
 ---
