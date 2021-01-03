@@ -2,26 +2,43 @@
 
 package org.jire.kna
 
-fun ReadableSource.byte(address: Long, offset: Long = 0) =
-	read(address, Byte.SIZE_BYTES.toLong())?.getByte(offset) ?: 0
+fun ReadableSource.byte(address: Long, offset: Long = 0): Byte {
+	val readPointer = readPointer(address, 1)
+	if (!readPointer.readable()) return 0
+	return readPointer.getByte(offset)
+}
 
-fun ReadableSource.short(address: Long, offset: Long = 0) =
-	read(address, Short.SIZE_BYTES.toLong())?.getShort(offset) ?: 0
+fun ReadableSource.short(address: Long, offset: Long = 0): Short {
+	val readPointer = readPointer(address, 2)
+	if (!readPointer.readable()) return 0
+	return readPointer.getShort(offset)
+}
 
-fun ReadableSource.int(address: Long, offset: Long = 0) =
-	read(address, Int.SIZE_BYTES.toLong())?.getInt(offset) ?: 0
+fun ReadableSource.int(address: Long, offset: Long = 0): Int {
+	val readPointer = readPointer(address, 4)
+	if (!readPointer.readable()) return 0
+	return readPointer.getInt(offset)
+}
 
-fun ReadableSource.long(address: Long, offset: Long = 0) =
-	read(address, Long.SIZE_BYTES.toLong())?.getLong(offset) ?: 0L
+fun ReadableSource.long(address: Long, offset: Long = 0): Long {
+	val readPointer = readPointer(address, 8)
+	if (!readPointer.readable()) return 0
+	return readPointer.getLong(offset)
+}
 
-fun ReadableSource.float(address: Long, offset: Long = 0) =
-	read(address, Float.SIZE_BYTES.toLong())?.getFloat(offset) ?: 0F
+fun ReadableSource.float(address: Long, offset: Long = 0): Float {
+	val readPointer = readPointer(address, 4)
+	if (!readPointer.readable()) return 0F
+	return readPointer.getFloat(offset)
+}
 
-fun ReadableSource.double(address: Long, offset: Long = 0) =
-	read(address, Double.SIZE_BYTES.toLong())?.getDouble(offset) ?: 0.0
+fun ReadableSource.double(address: Long, offset: Long = 0): Double {
+	val readPointer = readPointer(address, 8)
+	if (!readPointer.readable()) return 0.0
+	return readPointer.getDouble(offset)
+}
 
-fun ReadableSource.char(address: Long, offset: Long = 0) =
-	read(address, Char.SIZE_BYTES.toLong())?.getChar(offset) ?: 0.toChar()
+fun ReadableSource.char(address: Long, offset: Long = 0) = short(address, offset).toChar()
 
 fun ReadableSource.boolean(address: Long, offset: Long = 0) =
 	byte(address, offset).toInt() != 0

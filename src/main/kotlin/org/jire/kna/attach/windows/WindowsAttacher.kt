@@ -20,7 +20,7 @@ object WindowsAttacher : AbstractAttacher() {
 		try {
 			while (JNAKernel32.Process32Next(snapshot, entry)) {
 				val fileName = Native.toString(entry.szExeFile)
-				if (processName == fileName) return byID(entry.th32ProcessID.toInt(), access)
+				if (processName == fileName) return byID(config, entry.th32ProcessID.toInt(), access)
 			}
 		} finally {
 			JNAKernel32.CloseHandle(snapshot)

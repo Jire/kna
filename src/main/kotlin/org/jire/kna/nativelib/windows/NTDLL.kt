@@ -8,8 +8,8 @@ object NTDLL : DirectNativeLib("ntdll") {
 	@JvmStatic
 	external fun NtReadVirtualMemory(
 		processHandle: Pointer,
-		baseAddress: Pointer,
-		buffer: Pointer,
+		baseAddress: Long,
+		buffer: Long,
 		numberOfBytesToRead: Long,
 		numberOfBytesReaded: Pointer
 	)
@@ -17,8 +17,8 @@ object NTDLL : DirectNativeLib("ntdll") {
 	@JvmStatic
 	external fun NtWriteVirtualMemory(
 		processHandle: Pointer,
-		baseAddress: Pointer,
-		buffer: Pointer,
+		baseAddress: Long,
+		buffer: Long,
 		numberOfBytesToWrite: Long,
 		numberOfBytesWritten: Pointer
 	)

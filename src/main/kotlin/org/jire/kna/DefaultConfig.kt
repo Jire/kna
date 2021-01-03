@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 
 class DefaultConfig : Config {
 	
-	protected val keys: Object2ObjectMap<ConfigKey<*>, Any?> = Object2ObjectOpenHashMap()
+	internal val keys: Object2ObjectMap<ConfigKey<*>, Any?> = Object2ObjectOpenHashMap()
 	
 	override fun <T> set(key: ConfigKey<T>, value: T) {
 		keys[key] = value

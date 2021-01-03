@@ -1,9 +1,9 @@
 package org.jire.kna.cached.page
 
-import com.sun.jna.Memory
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap
 import net.openhft.chronicle.core.OS
+import org.jire.kna.Pointer
 import org.jire.kna.cached.CachedReadableSource
 
 interface PageCachedReadableSource : CachedReadableSource {
@@ -18,12 +18,13 @@ interface PageCachedReadableSource : CachedReadableSource {
 			(this ushr trailingZeroBits) shl trailingZeroBits
 	}
 	
-	override fun readCached(address: Long, bytesToRead: Long): Memory? {
+	override fun readCached(address: Long, bytesToRead: Long): Pointer {
 		if (bytesToRead > pageSize || address < pageSize) return readSource(address, bytesToRead)
 		
 		val pageIndex = address.toPageIndex()
 		val pageEndIndex = (address + bytesToRead).toPageIndex()
 		if (pageIndex != pageEndIndex || address < pageIndex) return readSource(address, bytesToRead)
+		val offset = address - pageIndex
 		
 		val pages = cachedPages.get()
 		
@@ -34,12 +35,10 @@ interface PageCachedReadableSource : CachedReadableSource {
 		}
 		
 		if (page.needsRead()) {
-			page.resetPeer()
 			if (!page.read(pageIndex)) return readSource(address, bytesToRead)
 		}
 		
-		page.setPeer(address - pageIndex)
-		return page.memory
+		return page.address.offsetPointer(offset)
 	}
 	
 }

@@ -1,19 +1,14 @@
 package org.jire.kna
 
-import com.sun.jna.Memory
-import com.sun.jna.Pointer
-
 interface ReadableSource : Source {
 	
-	fun read(address: Pointer, data: Pointer, bytesToRead: Long): Boolean
+	fun read(address: Long, data: Pointer, bytesToRead: Long): Boolean
+	fun read(address: Long, bytesToRead: Long) =
+		address != 0L && read(offset(address), PointerCache[bytesToRead], bytesToRead)
 	
-	fun read(address: Long, data: Memory, bytesToRead: Long = data.size()) =
-		read(addressToPointer(address), data, bytesToRead)
+	fun readPointer(address: Long, data: Pointer, bytesToRead: Long): Pointer =
+		if (read(offset(address), data, bytesToRead)) data else Pointer.NULL
 	
-	fun read(address: Pointer, bytesToRead: Long): Memory? = MemoryCache[bytesToRead].run {
-		if (read(address, this, bytesToRead)) this else null
-	}
-	
-	fun read(address: Long, bytesToRead: Long) = read(addressToPointer(address), bytesToRead)
+	fun readPointer(address: Long, bytesToRead: Long) = readPointer(address, PointerCache[bytesToRead], bytesToRead)
 	
 }

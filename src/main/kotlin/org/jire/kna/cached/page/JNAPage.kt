@@ -1,7 +1,6 @@
 package org.jire.kna.cached.page
 
-import com.sun.jna.Memory
-import com.sun.jna.Pointer
+import org.jire.kna.Pointer
 
 internal class JNAPage(
 	override val source: PageCachedReadableSource,
@@ -9,18 +8,13 @@ internal class JNAPage(
 	override val cacheExpireMillis: Long
 ) : Page {
 	
-	val memory = Memory(size)
-	val originalPeer = Pointer.nativeValue(memory)
+	val address = Pointer.alloc(size)
 	
-	fun setPeer(offset: Long) = Pointer.nativeValue(memory, originalPeer + offset)
-	fun resetPeer() = Pointer.nativeValue(memory, originalPeer)
-	
-	@Volatile
 	var lastRead = UNSET_LAST_READ
 	
 	override fun needsRead(now: Long) = lastRead == UNSET_LAST_READ || now - lastRead >= cacheExpireMillis
 	
-	override fun read(address: Long) = source.read(address, memory, size).apply {
+	override fun read(address: Long) = source.read(address, this.address, size).apply {
 		if (this) lastRead = System.currentTimeMillis()
 	}
 	

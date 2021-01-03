@@ -1,8 +1,8 @@
 package org.jire.kna.cached
 
-import com.sun.jna.Memory
 import org.jire.kna.ConfigKey
 import org.jire.kna.DefaultConfigKey
+import org.jire.kna.Pointer
 import org.jire.kna.ReadableSource
 
 interface CachedReadableSource : ReadableSource {
@@ -16,12 +16,11 @@ interface CachedReadableSource : ReadableSource {
 	
 	val cacheExpireMillis get() = DEFAULT_CACHE_EXPIRATION_MILLIS
 	
-	fun readCached(address: Long, bytesToRead: Long): Memory?
+	fun readCached(address: Long, bytesToRead: Long): Pointer
 	
-	fun readSource(address: Long, bytesToRead: Long) = super.read(address, bytesToRead)
+	fun readSource(address: Long, bytesToRead: Long) = super.readPointer(address, bytesToRead)
 	
-	override fun read(address: Long, bytesToRead: Long): Memory? {
-		if (address == 0L || address > Int.MAX_VALUE) return null
+	override fun readPointer(address: Long, bytesToRead: Long): Pointer {
 		if (cacheExpireMillis == DISABLED_CACHE_EXPIRATION_MILLIS) return readSource(address, bytesToRead)
 		return readCached(address, bytesToRead)
 	}

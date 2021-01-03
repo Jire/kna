@@ -8,8 +8,8 @@ object Kernel32 : DirectNativeLib("Kernel32") {
 	@JvmStatic
 	external fun ReadProcessMemory(
 		hProcess: Pointer,
-		lpBaseAddress: Pointer,
-		lpBuffer: Pointer,
+		lpBaseAddress: Long,
+		lpBuffer: Long,
 		nSize: Int,
 		lpNumberOfBytesRead: Int
 	): Long
@@ -17,8 +17,8 @@ object Kernel32 : DirectNativeLib("Kernel32") {
 	@JvmStatic
 	external fun WriteProcessMemory(
 		hProcess: Pointer,
-		lpBaseAddress: Pointer,
-		lpBuffer: Pointer,
+		lpBaseAddress: Long,
+		lpBuffer: Long,
 		nSize: Int,
 		lpNumberOfBytesWritten: Int
 	): Long
