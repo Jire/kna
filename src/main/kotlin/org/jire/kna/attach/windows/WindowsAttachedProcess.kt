@@ -3,14 +3,14 @@ package org.jire.kna.attach.windows
 import com.sun.jna.Memory
 import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.WinNT
-import org.jire.kna.attach.AbstractAttachedProcess
 import org.jire.kna.attach.AttachConfig
 import org.jire.kna.attach.AttachConfigKey
+import org.jire.kna.attach.CachedAttachedProcess
 import org.jire.kna.attach.DefaultAttachConfigKey
 import org.jire.kna.nativelib.windows.Kernel32
 import org.jire.kna.nativelib.windows.NTDLL
 
-class WindowsAttachedProcess(config: AttachConfig, val handle: WinNT.HANDLE) : AbstractAttachedProcess(config) {
+class WindowsAttachedProcess(config: AttachConfig, val handle: WinNT.HANDLE) : CachedAttachedProcess(config) {
 	
 	companion object {
 		val KERNEL32_READS: AttachConfigKey<Boolean> = DefaultAttachConfigKey(true)
