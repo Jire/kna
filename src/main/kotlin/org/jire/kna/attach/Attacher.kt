@@ -1,5 +1,7 @@
 package org.jire.kna.attach
 
+import org.jire.kna.Config
+
 interface Attacher {
 	
 	fun defaultAttachAccess(): AttachAccess
@@ -7,13 +9,13 @@ interface Attacher {
 	fun byName(
 		processName: String,
 		access: AttachAccess = defaultAttachAccess(),
-		initConfig: (AttachConfig.() -> Unit)? = null
+		initConfig: (Config.() -> Unit)? = null
 	): AttachedProcess?
 	
 	fun byID(
 		processID: Int,
 		access: AttachAccess = defaultAttachAccess(),
-		initConfig: (AttachConfig.() -> Unit)? = null
+		initConfig: (Config.() -> Unit)? = null
 	): AttachedProcess?
 	
 }

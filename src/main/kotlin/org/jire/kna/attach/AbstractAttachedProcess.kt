@@ -1,6 +1,8 @@
 package org.jire.kna.attach
 
-abstract class AbstractAttachedProcess(override val config: AttachConfig) : AttachedProcess {
+import org.jire.kna.Config
+
+abstract class AbstractAttachedProcess(override val config: Config) : AttachedProcess {
 	
 	override val address = 0L
 	

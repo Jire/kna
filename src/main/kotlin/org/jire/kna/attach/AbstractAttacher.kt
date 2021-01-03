@@ -1,18 +1,21 @@
 package org.jire.kna.attach
 
+import org.jire.kna.Config
+import org.jire.kna.DefaultConfig
+
 abstract class AbstractAttacher : Attacher {
 	
-	private fun defaultConfig(initConfig: (AttachConfig.() -> Unit)?): AttachConfig =
-		DefaultAttachConfig().apply { if (initConfig != null) initConfig() }
+	private fun defaultConfig(initConfig: (Config.() -> Unit)?): Config =
+		DefaultConfig().apply { if (initConfig != null) initConfig() }
 	
 	protected abstract fun byID(
-		config: AttachConfig,
+		config: Config,
 		processID: Int,
 		access: AttachAccess
 	): AttachedProcess?
 	
 	protected abstract fun byName(
-		config: AttachConfig,
+		config: Config,
 		processName: String,
 		access: AttachAccess
 	): AttachedProcess?
@@ -20,13 +23,13 @@ abstract class AbstractAttacher : Attacher {
 	override fun byID(
 		processID: Int,
 		access: AttachAccess,
-		initConfig: (AttachConfig.() -> Unit)?
+		initConfig: (Config.() -> Unit)?
 	) = byID(defaultConfig(initConfig), processID, access)
 	
 	override fun byName(
 		processName: String,
 		access: AttachAccess,
-		initConfig: (AttachConfig.() -> Unit)?
+		initConfig: (Config.() -> Unit)?
 	) = byName(defaultConfig(initConfig), processName, access)
 	
 }

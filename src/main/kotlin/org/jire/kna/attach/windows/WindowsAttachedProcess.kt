@@ -3,22 +3,22 @@ package org.jire.kna.attach.windows
 import com.sun.jna.Memory
 import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.WinNT
-import org.jire.kna.attach.AttachConfig
-import org.jire.kna.attach.AttachConfigKey
+import org.jire.kna.Config
+import org.jire.kna.ConfigKey
+import org.jire.kna.DefaultConfigKey
 import org.jire.kna.attach.CachedAttachedProcess
-import org.jire.kna.attach.DefaultAttachConfigKey
 import org.jire.kna.nativelib.windows.Kernel32
 import org.jire.kna.nativelib.windows.NTDLL
 
-class WindowsAttachedProcess(config: AttachConfig, val handle: WinNT.HANDLE) : CachedAttachedProcess(config) {
+class WindowsAttachedProcess(config: Config, val handle: WinNT.HANDLE) : CachedAttachedProcess(config) {
 	
 	companion object {
-		val KERNEL32_READS: AttachConfigKey<Boolean> = DefaultAttachConfigKey(true)
-		val KERNEL32_WRITES: AttachConfigKey<Boolean> = DefaultAttachConfigKey(false)
+		val KERNEL_32_READS: ConfigKey<Boolean> = DefaultConfigKey(true)
+		val KERNEL_32_WRITES: ConfigKey<Boolean> = DefaultConfigKey(false)
 	}
 	
-	val kernel32Reads = config[KERNEL32_READS]
-	val kernel32Writes = config[KERNEL32_WRITES]
+	val kernel32Reads = config[KERNEL_32_READS]
+	val kernel32Writes = config[KERNEL_32_WRITES]
 	
 	override val modules = WindowsAttachedModules()
 	
