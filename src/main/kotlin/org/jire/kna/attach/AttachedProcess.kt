@@ -7,4 +7,6 @@ interface AttachedProcess : ReadableSource, WritableSource {
 	
 	fun modules(attach: Boolean = true): AttachedModules
 	
+	val config: AttachConfig
+	
 }

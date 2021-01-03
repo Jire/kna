@@ -6,12 +6,14 @@ interface Attacher {
 	
 	fun byName(
 		processName: String,
-		attachAccess: AttachAccess = defaultAttachAccess()
+		access: AttachAccess = defaultAttachAccess(),
+		initConfig: (AttachConfig.() -> Unit)? = null
 	): AttachedProcess?
 	
 	fun byID(
 		processID: Int,
-		attachAccess: AttachAccess = defaultAttachAccess()
+		access: AttachAccess = defaultAttachAccess(),
+		initConfig: (AttachConfig.() -> Unit)? = null
 	): AttachedProcess?
 	
 }
