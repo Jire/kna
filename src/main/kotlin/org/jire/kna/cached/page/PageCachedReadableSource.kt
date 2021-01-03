@@ -18,17 +18,12 @@ interface PageCachedReadableSource : CachedReadableSource {
 			(this ushr trailingZeroBits) shl trailingZeroBits
 	}
 	
-	override fun read(address: Long, bytesToRead: Long): Memory? {
-		if (address == 0L || address > Int.MAX_VALUE) return null
-		if (bytesToRead > pageSize) return super.read(address, bytesToRead)
+	override fun readCached(address: Long, bytesToRead: Long): Memory? {
+		if (bytesToRead > pageSize || address < pageSize) return readSource(address, bytesToRead)
 		
 		val pageIndex = address.toPageIndex()
-		if (pageIndex == 0L) return null
-		
 		val pageEndIndex = (address + bytesToRead).toPageIndex()
-		if (pageEndIndex == 0L) return null
-		
-		if (pageIndex != pageEndIndex || address < pageIndex) super.read(address, bytesToRead)
+		if (pageIndex != pageEndIndex || address < pageIndex) return readSource(address, bytesToRead)
 		
 		val pages = cachedPages.get()
 		
@@ -40,7 +35,7 @@ interface PageCachedReadableSource : CachedReadableSource {
 		
 		if (page.needsRead()) {
 			page.resetPeer()
-			if (!page.doRead(pageIndex)) return super.read(address, bytesToRead)
+			if (!page.read(pageIndex)) return readSource(address, bytesToRead)
 		}
 		
 		page.setPeer(address - pageIndex)
