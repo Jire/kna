@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	kotlin("jvm") version "1.4.21"
 	java
@@ -5,13 +7,14 @@ plugins {
 	`maven-publish`
 	id("com.github.dcendents.android-maven") version "2.1" apply true
 	id("com.jfrog.bintray") version "1.8.5" apply true
+	id("me.champeau.gradle.jmh") version "0.5.2"
 }
 
 val PROJECT_NAME = "kna"
 val PROJECT_DESCRIPTION = "High-performance easy native access from Kotlin"
 val PROJECT_GROUP = "org.jire"
 val PROJECT_ARTIFACT = "kna"
-val PROJECT_VERSION = "0.2.2"
+val PROJECT_VERSION = "0.2.3"
 val PROJECT_LICENSE = "Affero General Public License 3.0"
 val PROJECT_LICENSE_TAG = "AGPL-V3"
 val PROJECT_LICENSE_URL = "https://www.gnu.org/licenses/agpl-3.0.txt"
@@ -36,6 +39,13 @@ dependencies {
 	implementation("net.java.dev.jna", "jna", jnaVersion)
 	implementation("net.java.dev.jna", "jna-platform", jnaVersion)
 	implementation("it.unimi.dsi", "fastutil", "8.4.4")
+	implementation("net.openhft", "chronicle-core", "2.20.125")
+	
+	val jmhVersion = "1.25"
+	implementation("org.openjdk.jmh", "jmh-core", jmhVersion)
+	annotationProcessor("org.openjdk.jmh", "jmh-generator-annprocess", jmhVersion)
+	jmh("org.openjdk.jmh", "jmh-core", jmhVersion)
+	jmhAnnotationProcessor("org.openjdk.jmh", "jmh-generator-annprocess", jmhVersion)
 }
 
 java {
@@ -115,4 +125,17 @@ bintray {
 			}
 		}
 	}
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions.jvmTarget = "1.8"
+}
+
+jmh {
+	duplicateClassesStrategy = DuplicatesStrategy.INCLUDE
 }
